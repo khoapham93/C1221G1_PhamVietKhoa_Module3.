@@ -1,14 +1,15 @@
-create table `student-management`.`Student`(
+create database student_management;
+create table `student`(
 id int not null primary key,
 name varchar(45),
 age int,
 country varchar(45)
 );
-create table `student-management`.`Class`(
+create table `class`(
 id int not null primary key,
 name varchar(45)
 );
-create table `student-management`.`Teacher`(
+create table `teacher`(
 id int not null primary key,
 name varchar(45),
 age int,

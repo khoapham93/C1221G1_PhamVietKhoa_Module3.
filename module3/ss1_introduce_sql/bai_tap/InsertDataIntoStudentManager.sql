@@ -1,4 +1,4 @@
-use `student-management`;
+use `student_management`;
 
 insert into Student values(1,'Khoa Pham',30,'Viet Nam');
 insert into Student values(2,'Tuan Pham',20,'Viet Nam');
