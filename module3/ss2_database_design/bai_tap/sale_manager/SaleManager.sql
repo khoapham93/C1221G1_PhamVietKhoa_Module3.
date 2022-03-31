@@ -27,5 +27,5 @@ product_id int not null,
 order_quantity int,
 primary key(order_id,product_id),
 foreign key(order_id) references `order`(order_id),
-foreign key(product_id) references prodcut(product_id)
+foreign key(product_id) references product(product_id)
 );
