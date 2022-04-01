@@ -7,7 +7,7 @@ where student_name like 'h%';
 -- Hiển thị các thông tin lớp học có thời gian bắt đầu vào tháng 12
 select *
 from class
-where start_date like '%-12-%';
+where month(start_date) = 12;
 
 -- Hiển thị tất cả các thông tin môn học có credit trong khoảng từ 3-5.
 select *
