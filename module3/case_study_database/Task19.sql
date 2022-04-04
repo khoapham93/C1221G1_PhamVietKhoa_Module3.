@@ -3,6 +3,7 @@
  */
 
 USE furama_manager;
+set SQL_SAFE_UPDATES = 0;
 UPDATE service_include,
     (
         SELECT si.service_include_id
@@ -15,3 +16,4 @@ UPDATE service_include,
     ) AS selet_by_id
 SET service_include.`price` = service_include.`price` * 2
 WHERE service_include.service_include_id = selet_by_id.service_include_id;
+set SQL_SAFE_UPDATES = 1;

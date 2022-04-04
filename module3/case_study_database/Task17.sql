@@ -21,11 +21,13 @@ WHERE (year(ctr.date_signed) = 2021 OR year(ctr.date_end) = 2021)
 GROUP BY c.customer_id;
 
 
+SET SQL_SAFE_UPDATES = 0;
 UPDATE customer
 SET customer_type_id = 1
 WHERE customer_id IN (SELECT customer_id
                       FROM find_customer_platinum
                       WHERE tong_tien > 10000000);
+SET SQL_SAFE_UPDATES = 1;
 
 SELECT *
 FROM find_customer_platinum;

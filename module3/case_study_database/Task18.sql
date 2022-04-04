@@ -1,23 +1,19 @@
 /**
   18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
  */
--- tạo store procedure
 
+-- edit foreign key
+USE furama_manager;
+ALTER TABLE contract
+    MODIFY customer_id int,
+    DROP FOREIGN KEY contract_ibfk_2;
+ALTER TABLE contract
+    ADD CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE SET NULL;
 
-CREATE OR REPLACE VIEW find_customer_have_contract_in_2021 AS
-SELECT DISTINCT customer_id
-FROM contract
-WHERE year(date_signed) = 2021
-   OR year(date_end) = 2021;
-
-DELETE cu, c, cd
-FROM  contract c
-         INNER JOIN customer cu ON cu.customer_id = c.customer_id
-         INNER JOIN contract_detail cd ON c.contract_id = cd.contract_id
-WHERE c.customer_id NOT IN (SELECT customer_id FROM find_customer_have_contract_in_2021);
-
-
-SELECT cu.customer_id
+-- delete customer
+set SQL_SAFE_UPDATES = 0;
+DELETE cu
 FROM customer cu
-INNER JOIN contract c ON cu.customer_id = c.customer_id
-WHERE cu.customer_id NOT IN (SELECT customer_id FROM find_customer_have_contract_in_2021);
+         INNER JOIN contract c ON cu.customer_id = c.customer_id
+WHERE (year(c.date_signed) < 2021 OR year(c.date_end) < 2021);
+set SQL_SAFE_UPDATES = 1;

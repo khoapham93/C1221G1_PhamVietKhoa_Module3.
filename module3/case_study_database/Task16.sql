@@ -13,11 +13,9 @@ WHERE (c.date_signed BETWEEN '2019-01-01' AND '2021-12-31')
 GROUP BY em.employee_id
 HAVING number_of_contract_signed > 0;
 
--- checking view
-SELECT *
-FROM find_employee_have_contract;
-
 -- delete employee not in view
+set SQL_safe_updates = 0;
 DELETE
 FROM employee
 WHERE employee_id NOT IN (SELECT employee_id FROM find_employee_have_contract);
+set SQL_safe_updates = 1;

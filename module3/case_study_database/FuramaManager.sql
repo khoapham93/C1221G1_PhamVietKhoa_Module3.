@@ -1,146 +1,146 @@
 -- create database
-create database furama_manager;
-use furama_manager;
+CREATE DATABASE furama_manager;
+USE furama_manager;
 
-create table `position`
+CREATE TABLE `position`
 (
-    position_id   int auto_increment primary key,
+    position_id   int AUTO_INCREMENT PRIMARY KEY,
     position_name varchar(100)
 );
 
-create table academic_level
+CREATE TABLE academic_level
 (
-    academic_id int auto_increment primary key,
+    academic_id int AUTO_INCREMENT PRIMARY KEY,
     level_name  varchar(50)
 );
 
-create table department
+CREATE TABLE department
 (
-    department_id   int auto_increment primary key,
+    department_id   int AUTO_INCREMENT PRIMARY KEY,
     department_name varchar(100)
 );
 
-create table employee
+CREATE TABLE employee
 (
-    employee_id   int auto_increment primary key,
-    `name`        varchar(50) not null,
-    birthday      date        not null,
-    id_card       varchar(20) not null,
-    salary        double      not null,
-    phone         varchar(20) not null,
+    employee_id   int AUTO_INCREMENT PRIMARY KEY,
+    `name`        varchar(50) NOT NULL,
+    birthday      date        NOT NULL,
+    id_card       varchar(20) NOT NULL,
+    salary        double      NOT NULL,
+    phone         varchar(20) NOT NULL,
     email         varchar(45),
     address       varchar(200),
     position_id   int,
     academic_id   int,
     department_id int,
-    foreign key (position_id) references `position` (position_id),
-    foreign key (academic_id) references academic_level (academic_id),
-    foreign key (department_id) references department (department_id)
+    FOREIGN KEY (position_id) REFERENCES `position` (position_id),
+    FOREIGN KEY (academic_id) REFERENCES academic_level (academic_id),
+    FOREIGN KEY (department_id) REFERENCES department (department_id)
 );
 
-create table customer_type
+CREATE TABLE customer_type
 (
-    customer_type_id int auto_increment primary key,
+    customer_type_id int AUTO_INCREMENT PRIMARY KEY,
     `value`          varchar(45)
 );
 
-create table customer
+CREATE TABLE customer
 (
-    customer_id      int auto_increment primary key,
-    customer_type_id int         not null,
-    `name`           varchar(50) not null,
-    birthday         date        not null,
-    gender           bit(1)      not null,
-    id_card          varchar(20) not null,
-    phone            varchar(20) not null,
+    customer_id      int AUTO_INCREMENT PRIMARY KEY,
+    customer_type_id int         NOT NULL,
+    `name`           varchar(50) NOT NULL,
+    birthday         date        NOT NULL,
+    gender           bit(1)      NOT NULL,
+    id_card          varchar(20) NOT NULL,
+    phone            varchar(20) NOT NULL,
     email            varchar(45),
     address          varchar(200),
-    foreign key (customer_type_id) references customer_type (customer_type_id)
+    FOREIGN KEY (customer_type_id) REFERENCES customer_type (customer_type_id)
 );
 
-create table rent_type
+CREATE TABLE rent_type
 (
-    rent_type_id   int not null auto_increment primary key,
+    rent_type_id   int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     rent_type_name varchar(45)
 );
 
-create table facility_type
+CREATE TABLE facility_type
 (
-    facility_type_id int not null auto_increment primary key,
+    facility_type_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `value`          varchar(45)
 );
 
-create table facility
+CREATE TABLE facility
 (
-    facility_id      int         not null auto_increment primary key,
-    facility_name    varchar(45) not null,
+    facility_id      int         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    facility_name    varchar(45) NOT NULL,
     floor_square     double,
-    rental_fee       double      not null,
+    rental_fee       double      NOT NULL,
     maximum_people   int,
-    facility_type_id int         not null,
-    rent_type_id     int         not null,
+    facility_type_id int         NOT NULL,
+    rent_type_id     int         NOT NULL,
     room_standard    varchar(45),
     description      varchar(45),
     pool_square      double,
     floor            int,
-    foreign key (facility_type_id) references facility_type (facility_type_id),
-    foreign key (rent_type_id) references rent_type (rent_type_id)
+    FOREIGN KEY (facility_type_id) REFERENCES facility_type (facility_type_id),
+    FOREIGN KEY (rent_type_id) REFERENCES rent_type (rent_type_id)
 );
 
-create table contract
+CREATE TABLE contract
 (
-    contract_id int    not null auto_increment primary key,
-    date_signed date   not null,
-    date_end    date   not null,
-    deposit     double not null,
-    employee_id int    not null,
-    customer_id int    not null,
-    facility_id int    not null,
-    foreign key (employee_id) references employee (employee_id),
-    foreign key (customer_id) references customer (customer_id),
-    foreign key (facility_id) references facility (facility_id)
+    contract_id int    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    date_signed date   NOT NULL,
+    date_end    date   NOT NULL,
+    deposit     double NOT NULL,
+    employee_id int    NOT NULL,
+    customer_id int    NOT NULL,
+    facility_id int    NOT NULL,
+    FOREIGN KEY (employee_id) REFERENCES employee (employee_id),
+    FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
+    FOREIGN KEY (facility_id) REFERENCES facility (facility_id)
 
 );
 
-create table service_include
+CREATE TABLE service_include
 (
-    service_include_id   int         not null auto_increment primary key,
-    service_include_name varchar(45) not null,
-    price                double      not null,
+    service_include_id   int         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    service_include_name varchar(45) NOT NULL,
+    price                double      NOT NULL,
     unit                 varchar(10),
     status               varchar(45)
 );
 
-create table contract_detail
+CREATE TABLE contract_detail
 (
-    contract_detail_id int not null auto_increment primary key,
-    contract_id        int not null,
-    service_include_id int not null,
-    amount             int not null,
-    foreign key (contract_id) references contract (contract_id),
-    foreign key (service_include_id) references service_include (service_include_id)
+    contract_detail_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    contract_id        int NOT NULL,
+    service_include_id int NOT NULL,
+    amount             int NOT NULL,
+    FOREIGN KEY (contract_id) REFERENCES contract (contract_id),
+    FOREIGN KEY (service_include_id) REFERENCES service_include (service_include_id)
 );
 
 -- insert data into database
-insert into furama_manager.position (position_id, position_name)
-values (1, 'Quản Lý'),
+INSERT INTO furama_manager.position (position_id, position_name)
+VALUES (1, 'Quản Lý'),
        (2, 'Nhân Viên');
 
-insert into furama_manager.academic_level (academic_id, level_name)
-values (1, 'Trung Cấp'),
+INSERT INTO furama_manager.academic_level (academic_id, level_name)
+VALUES (1, 'Trung Cấp'),
        (2, 'Cao Đẳng'),
        (3, 'Đại Học'),
        (4, 'Sau Đại Học');
 
-insert into furama_manager.department (department_id, department_name)
-values (1, 'Sale-Marketing'),
+INSERT INTO furama_manager.department (department_id, department_name)
+VALUES (1, 'Sale-Marketing'),
        (2, 'Hành chính'),
        (3, 'Phục vụ'),
        (4, 'Quản lý');
 
-insert into furama_manager.employee (employee_id, name, birthday, id_card, salary, phone, email,
+INSERT INTO furama_manager.employee (employee_id, name, birthday, id_card, salary, phone, email,
                                      address, position_id, academic_id, department_id)
-values (1, 'Nguyễn Văn An', '1970-11-07', 456231786, 10000000, 0901234121, 'annguyen@gmail.com',
+VALUES (1, 'Nguyễn Văn An', '1970-11-07', 456231786, 10000000, 0901234121, 'annguyen@gmail.com',
         '295 Nguyễn Tất Thành, Đà Nẵng', 1, 3, 1),
        (2, 'Lê Văn Bình', '1997-04-09', 654231234, 7000000, 0934212314, 'binhlv@gmail.com',
         '22 Yên Bái, Đà Nẵng', 1, 2, 2),
@@ -161,66 +161,66 @@ values (1, 'Nguyễn Văn An', '1970-11-07', 456231786, 10000000, 0901234121, 'a
        (10, 'Nguyễn Công Đạo', '1994-01-08', 755434343, 8000000, 0988767111, 'nguyencongdao12@gmail.com',
         '6 Hoà Khánh, Đồng Nai', 2, 3, 2);
 
-insert into furama_manager.customer_type (customer_type_id, value)
-values (1, 'Diamond'),
+INSERT INTO furama_manager.customer_type (customer_type_id, value)
+VALUES (1, 'Diamond'),
        (2, 'Platinium'),
        (3, 'Gold'),
        (4, 'Silver'),
        (5, 'Member');
 
-insert into furama_manager.customer (customer_id, customer_type_id, name, birthday, gender, id_card, phone, email,
+INSERT INTO furama_manager.customer (customer_id, customer_type_id, name, birthday, gender, id_card, phone, email,
                                      address)
-values (1, 5, 'Nguyễn Thị Hào', '1970-11-07', 'false', 643431213, 0945423362, 'thihao07@gmail.com',
+VALUES (1, 5, 'Nguyễn Thị Hào', '1970-11-07', FALSE, 643431213, 0945423362, 'thihao07@gmail.com',
         '23 Nguyễn Hoàng, Đà Nẵng'),
-       (2, 3, 'Phạm Xuân Diệu', '1992-08-08', 'true', 865342123, 0954333333, 'xuandieu92@gmail.com',
+       (2, 3, 'Phạm Xuân Diệu', '1992-08-08', TRUE, 865342123, 0954333333, 'xuandieu92@gmail.com',
         'K77/22 Thái Phiên, Quảng Trị'),
-       (3, 1, 'Trương Đình Nghệ', '1990-02-27', 'true', 488645199, 0373213122, 'nghenhan2702@gmail.com',
+       (3, 1, 'Trương Đình Nghệ', '1990-02-27', TRUE, 488645199, 0373213122, 'nghenhan2702@gmail.com',
         'K323/12 Ông Ích Khiêm, Vinh'),
-       (4, 1, 'Dương Văn Quan', '1981-07-08', 'true', 543432111, 0490039241, 'duongquan@gmail.com',
+       (4, 1, 'Dương Văn Quan', '1981-07-08', TRUE, 543432111, 0490039241, 'duongquan@gmail.com',
         'K453/12 Lê Lợi, Đà Nẵng'),
-       (5, 4, 'Hoàng Trần Nhi Nhi', '1995-12-09', 'false', 795453345, 0312345678, 'nhinhi123@gmail.com',
+       (5, 4, 'Hoàng Trần Nhi Nhi', '1995-12-09', FALSE, 795453345, 0312345678, 'nhinhi123@gmail.com',
         '224 Lý Thái Tổ, Gia Lai'),
-       (6, 4, 'Tôn Nữ Mộc Châu', '2005-12-06', 'false', 732434215, 0988888844, 'tonnuchau@gmail.com',
+       (6, 4, 'Tôn Nữ Mộc Châu', '2005-12-06', FALSE, 732434215, 0988888844, 'tonnuchau@gmail.com',
         '37 Yên Thế, Đà Nẵng'),
-       (7, 1, 'Nguyễn Mỹ Kim', '1984-04-08', 'false', 856453123, 0912345698, 'kimcuong84@gmail.com',
+       (7, 1, 'Nguyễn Mỹ Kim', '1984-04-08', FALSE, 856453123, 0912345698, 'kimcuong84@gmail.com',
         'K123/45 Lê Lợi, Hồ Chí Minh'),
-       (8, 3, 'Nguyễn Thị Hào', '1999-04-08', 'false', 965656433, 0763212345, 'haohao99@gmail.com',
+       (8, 3, 'Nguyễn Thị Hào', '1999-04-08', FALSE, 965656433, 0763212345, 'haohao99@gmail.com',
         '55 Nguyễn Văn Linh, Kon Tum'),
-       (9, 1, 'Trần Đại Danh', '1994-07-01', 'true', 432341235, 0643343433, 'danhhai99@gmail.com',
+       (9, 1, 'Trần Đại Danh', '1994-07-01', TRUE, 432341235, 0643343433, 'danhhai99@gmail.com',
         '24 Lý Thường Kiệt, Quảng Ngãi'),
-       (10, 2, 'Nguyễn Tâm Đắc', '1989-07-01', 'true', 344343432, 0987654321, 'dactam@gmail.com',
+       (10, 2, 'Nguyễn Tâm Đắc', '1989-07-01', TRUE, 344343432, 0987654321, 'dactam@gmail.com',
         '22 Ngô Quyền, Đà Nẵng');
 
-insert into furama_manager.rent_type (rent_type_id, rent_type_name)
-values (1, 'year'),
+INSERT INTO furama_manager.rent_type (rent_type_id, rent_type_name)
+VALUES (1, 'year'),
        (2, 'month'),
        (3, 'day'),
        (4, 'hour');
 
-insert into furama_manager.facility_type (facility_type_id, value)
-values (1, 'Villa'),
+INSERT INTO furama_manager.facility_type (facility_type_id, value)
+VALUES (1, 'Villa'),
        (2, 'House'),
        (3, 'Room');
 
-insert into furama_manager.facility (facility_id, facility_name, floor_square, rental_fee, maximum_people,
+INSERT INTO furama_manager.facility (facility_id, facility_name, floor_square, rental_fee, maximum_people,
                                      facility_type_id, rent_type_id, room_standard, description, pool_square, floor)
-values (1, 'Villa Beach Front', 25000, 10000000, 10, 1, 3, 'vip', 'Có hồ bơi', 500, 4),
-       (2, 'House Princess 01', 14000, 5000000, 7, 2, 2, 'vip', 'Có thêm bếp nướng', null, 3),
-       (3, 'Room Twin 01', 5000, 1000000, 2, 3, 4, 'normal', 'Có tivi', null, null),
+VALUES (1, 'Villa Beach Front', 25000, 10000000, 10, 1, 3, 'vip', 'Có hồ bơi', 500, 4),
+       (2, 'House Princess 01', 14000, 5000000, 7, 2, 2, 'vip', 'Có thêm bếp nướng', NULL, 3),
+       (3, 'Room Twin 01', 5000, 1000000, 2, 3, 4, 'normal', 'Có tivi', NULL, NULL),
        (4, 'Villa No Beach Front', 22000, 9000000, 8, 1, 3, 'normal', 'Có hồ bơi', 300, 3),
-       (5, 'House Princess 02', 10000, 4000000, 5, 2, 3, 'normal', 'Có thêm bếp nướng', null, 2),
-       (6, 'Room Twin 02', 3000, 900000, 2, 3, 4, 'normal', 'Có tivi', null, null);
+       (5, 'House Princess 02', 10000, 4000000, 5, 2, 3, 'normal', 'Có thêm bếp nướng', NULL, 2),
+       (6, 'Room Twin 02', 3000, 900000, 2, 3, 4, 'normal', 'Có tivi', NULL, NULL);
 
-insert into furama_manager.service_include (service_include_id, service_include_name, price, unit, status)
-values (1, 'Karaoke', 10000, 'giờ', 'tiện nghi, hiện tại'),
+INSERT INTO furama_manager.service_include (service_include_id, service_include_name, price, unit, status)
+VALUES (1, 'Karaoke', 10000, 'giờ', 'tiện nghi, hiện tại'),
        (2, 'Thuê xe máy', 10000, 'chiếc', 'hỏng 1 xe'),
        (3, 'Thuê xe đạp', 20000, 'chiếc', 'tốt'),
        (4, 'Buffet buổi sáng', 15000, 'suất', 'đầy đủ đồ ăn, tráng miệng'),
        (5, 'Buffet buổi trưa', 90000, 'suất', 'đầy đủ đồ ăn, tráng miệng'),
        (6, 'Buffet buổi tối', 16000, 'suất', 'đầy đủ đồ ăn, tráng miệng');
 
-insert into furama_manager.contract (contract_id, date_signed, date_end, deposit, employee_id, customer_id, facility_id)
-values (1, '2020-12-08', '2020-12-08', 0, 3, 1, 3),
+INSERT INTO furama_manager.contract (contract_id, date_signed, date_end, deposit, employee_id, customer_id, facility_id)
+VALUES (1, '2020-12-08', '2020-12-08', 0, 3, 1, 3),
        (2, '2020-07-14', '2020-07-21', 200000, 7, 3, 1),
        (3, '2021-03-15', '2021-03-17', 50000, 3, 4, 2),
        (4, '2021-01-14', '2021-01-18', 100000, 7, 5, 5),
@@ -233,8 +233,8 @@ values (1, '2020-12-08', '2020-12-08', 0, 3, 1, 3),
        (11, '2021-04-25', '2021-04-25', 0, 2, 2, 1),
        (12, '2021-05-25', '2021-05-27', 0, 7, 10, 1);
 
-insert into furama_manager.contract_detail (contract_detail_id, contract_id, service_include_id, amount)
-values (1, 2, 4, 5),
+INSERT INTO furama_manager.contract_detail (contract_detail_id, contract_id, service_include_id, amount)
+VALUES (1, 2, 4, 5),
        (2, 2, 5, 8),
        (3, 2, 6, 15),
        (4, 3, 1, 1),
@@ -242,3 +242,5 @@ values (1, 2, 4, 5),
        (6, 1, 3, 1),
        (7, 1, 2, 2),
        (8, 12, 2, 2);
+
+-- DROP DATABASE furama_manager;
