@@ -1,0 +1,129 @@
+.nomagrin {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.row_1 {
+    width: 100%;
+    margin: 0;
+
+}
+
+.row_2 {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.block {
+    width: 50%;
+    /*display: inline-block;*/
+
+}
+
+h2 {
+    font-size: 2.5em;
+    color: green;
+    text-transform: uppercase;
+}
+
+h3 {
+    padding: 30px;
+    font-style: italic;
+    text-transform: capitalize;
+}
+
+h4 {
+    font-size: 1em;
+    color: green;
+    font-style: italic;
+}
+h5{
+    text-transform: capitalize;
+}
+
+* {
+    font-family: "Segoe UI", serif;
+}
+
+hr {
+    color: coral;
+    border: .1px solid;
+    border-collapse: collapse;
+}
+
+#header {
+    padding-top: 30px;
+    margin-left: 350px;
+    margin-right: 350px;
+    text-align: center;
+}
+
+#content {
+    text-align: justify;
+    margin-left: 350px;
+    margin-right: 350px;
+    font-size: 1.25em;
+}
+
+#cover {
+    width: 40%;
+    height: 40%;
+}
+
+p {
+    text-indent: 40px;
+}
+
+#related_links {
+    padding-top: 0px;
+    text-align: left;
+    font-size: 1.25em;
+    list-style: none;
+    color: blue;
+    font-weight: bold;
+}
+
+#related_links li {
+    padding: 0.2em;
+}
+
+#related_links ul {
+    font-size: 1.25em;
+    margin: 0;
+    border: none;
+}
+
+#related_links a {
+    text-decoration: none;
+}
+
+#related_links li a:hover {
+    color: chocolate;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body{
+    position: relative;
+}
+.back_to_top {
+    --offset: 50px;
+    position: sticky;
+    bottom: 20px;
+    left: 95%;
+    place-self: end;
+    margin-top: calc(100vh + var(--offset));
+
+    /* visual styling */
+    text-decoration: none;
+    padding: 10px;
+    font-family: sans-serif;
+    color: #fff;
+    background: #000;
+    border-radius: 50px;
+    white-space: nowrap;
+}
