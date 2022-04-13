@@ -20,33 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b521df8b-1a4f-461e-ad4b-fc3c1aa76a86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ProductDiscountServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/result.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/src/main/java/ConverterServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/src/main/webapp/result.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/src/main/java/TranslationServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/src/main/webapp/result.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_dictionary/src/main/webapp/tesst.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/simple_login/src/main/java/LoginServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../thuc_hanh/web_display_system_time/src/main/java/ServerTimeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss10_jsp_jstl/thuc_hanh/currency_exchange/src/main/webapp/converter.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss10_jsp_jstl/thuc_hanh/simple_dictionary/src/main/webapp/dictionary.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../thuc_hanh/currency_exchange/.idea/gradle.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,8 +62,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.621" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.621" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
@@ -172,6 +153,8 @@
       <option name="presentableId" value="Default" />
       <updated>1649755872218</updated>
       <workItem from="1649755876332" duration="2283000" />
+      <workItem from="1649814359483" duration="208000" />
+      <workItem from="1649815127809" duration="88000" />
     </task>
     <servers />
   </component>
@@ -188,12 +171,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="447" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1649756333087">
       <screen x="66" y="0" width="1470" height="864" />
     </state>
     <state x="447" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/66.0.1470.864@66.0.1470.864" timestamp="1649756333086" />
+    <state x="580" y="187" key="FileChooserDialogImpl" timestamp="1649814566691">
+      <screen x="63" y="0" width="1473" height="864" />
+    </state>
+    <state x="580" y="187" key="FileChooserDialogImpl/63.0.1473.864@63.0.1473.864" timestamp="1649814566691" />
     <state width="979" height="226" key="GridCell.Tab.0.bottom" timestamp="1649758180455">
       <screen x="66" y="0" width="1470" height="864" />
     </state>
