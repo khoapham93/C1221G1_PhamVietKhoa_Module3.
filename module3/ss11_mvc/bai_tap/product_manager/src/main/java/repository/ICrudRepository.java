@@ -12,4 +12,6 @@ public interface ICrudRepository<E> {
     E findByid(Integer id);
 
     void remove(Integer id);
+
+    List<E> search(String keyWord);
 }

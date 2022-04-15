@@ -14,4 +14,6 @@ public interface IProductService {
     Product findByid(Integer id);
 
     void remove(Integer id);
+
+    List<Product> search(String keyWord);
 }

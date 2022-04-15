@@ -40,4 +40,10 @@ public class ProductServiceImpl implements IProductService {
     public void remove(Integer id) {
         iProductRepository.remove(id);
     }
+
+    @Override
+    public List<Product> search(String keyWord) {
+        return iProductRepository.search(keyWord);
+
+    }
 }

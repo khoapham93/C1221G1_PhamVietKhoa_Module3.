@@ -40,4 +40,15 @@ public class ProductRepositoryImpl implements IProductRepository {
     public void remove(Integer id) {
         productMap.remove(id);
     }
+
+    @Override
+    public List<Product> search(String keyWord) {
+        List<Product> resultSearch = new ArrayList<>();
+        for (Map.Entry<Integer, Product> entry : productMap.entrySet()) {
+            if (entry.getValue().getName().toLowerCase().contains(keyWord)){
+                resultSearch.add(entry.getValue());
+            }
+        }
+        return resultSearch;
+    }
 }

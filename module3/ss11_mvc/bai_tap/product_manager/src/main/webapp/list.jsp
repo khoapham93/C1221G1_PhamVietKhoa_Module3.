@@ -16,12 +16,16 @@
             <a class="btn btn-primary my-3" href="/customers?action=create" role="button"> + Create new product</a>
         </div>
         <div class="col-4">
-            <div class="input-group my-3">
-                <input type="text" class="form-control" placeholder="Searching product" aria-label="search">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+            <form method="get">
+                <div class="input-group my-3">
+                    <input type="text" class="form-control" placeholder="Searching product" aria-label="search" name="searchKey">
+                    <input type="hidden" name="action" value="search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
+                    </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     </div>
     <table class="table table-striped">
@@ -91,7 +95,7 @@
             </div>
         </div>
     </div>
-</div>  
+</div>
 </body>
 </html>
 

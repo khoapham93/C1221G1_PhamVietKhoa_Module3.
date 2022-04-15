@@ -28,13 +28,13 @@ public class ProductServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                createProduct(request,response);
+                createProduct(request, response);
                 break;
             case "edit":
-                editProduct(request,response);
+                editProduct(request, response);
                 break;
             case "delete":
-                deleteProduct(request,response);
+                deleteProduct(request, response);
                 break;
             case "view":
                 break;
@@ -42,8 +42,6 @@ public class ProductServlet extends HttpServlet {
                 goListProduct(request, response);
         }
     }
-
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -56,12 +54,13 @@ public class ProductServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                goCreateProduct(request,response);
+                goCreateProduct(request, response);
                 break;
             case "edit":
-                goEditProduct(request,response);
+                goEditProduct(request, response);
                 break;
-            case "delete":
+            case "search":
+                goSearchProduct(request, response);
                 break;
             case "view":
                 break;
@@ -69,6 +68,18 @@ public class ProductServlet extends HttpServlet {
                 goListProduct(request, response);
         }
 
+    }
+
+    private void goSearchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String keyWord = request.getParameter("searchKey").toLowerCase();
+        if ("".equals(keyWord)){
+            response.sendRedirect("/");
+        }else {
+            List<Product> products= iProductService.search(keyWord);
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("/list.jsp").forward(request, response);
+        }
+    
     }
 
     private void goEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -89,23 +100,25 @@ public class ProductServlet extends HttpServlet {
         request.getRequestDispatcher("/create.jsp").forward(request, response);
 
     }
+
     private void createProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
         Double price = Double.valueOf(request.getParameter("price"));
         String description = request.getParameter("description");
         String manufacturer = request.getParameter("manufacturer");
-        Integer id = (int)(Math.random() * 10000);
+        Integer id = (int) (Math.random() * 10000);
 
-        Product product = new Product(id,name,price,description,manufacturer);
+        Product product = new Product(id, name, price, description, manufacturer);
         Map<String, String> map = iProductService.save(product);
-        if(map.isEmpty()) {
+        if (map.isEmpty()) {
             request.setAttribute("message", "Product was create successfully!");
-            request.getRequestDispatcher("create.jsp").forward(request,response);
+            request.getRequestDispatcher("create.jsp").forward(request, response);
         } else {
             request.setAttribute("error", map);
-            request.getRequestDispatcher("create.jsp").forward(request,response);
+            request.getRequestDispatcher("create.jsp").forward(request, response);
         }
     }
+
     private void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.valueOf(request.getParameter("id"));
         String name = request.getParameter("name");
@@ -113,18 +126,19 @@ public class ProductServlet extends HttpServlet {
         String description = request.getParameter("description");
         String manufacturer = request.getParameter("manufacturer");
 
-        Product product = new Product(id,name,price,description,manufacturer);
+        Product product = new Product(id, name, price, description, manufacturer);
 
         Map<String, String> map = iProductService.save(product);
-        if(map.isEmpty()) {
+        if (map.isEmpty()) {
             request.setAttribute("message", "Product was update successfully!");
-            request.getRequestDispatcher("edit.jsp").forward(request,response);
+            request.getRequestDispatcher("edit.jsp").forward(request, response);
         } else {
             request.setAttribute("error", map);
             request.setAttribute("product", product);
-            request.getRequestDispatcher("edit.jsp").forward(request,response);
+            request.getRequestDispatcher("edit.jsp").forward(request, response);
         }
     }
+
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer id = Integer.valueOf(request.getParameter("id"));
         iProductService.remove(id);
