@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "DisplayCustomerListServlet", urlPatterns = "/customer-servlet")
+@WebServlet(name = "DisplayCustomerListServlet", urlPatterns = {"/customer-servlet","/"})
 public class DisplayCustomerListServlet extends HttpServlet {
     private List<Customer> customerList;
     private List<CustomerType> customerTypeList;
