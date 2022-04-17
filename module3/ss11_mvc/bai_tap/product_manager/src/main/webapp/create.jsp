@@ -14,22 +14,31 @@
             <form method="post">
                 <div class="form-group">
                     <label for="name">Product name</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="name" >
                     <c:if test='${error != null}'>
-                        <p class="text-danger">${error.get("name")}</p>
+                        <small class="text-danger">${error.get("name")}</small>
                     </c:if>
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
                     <input type="number" class="form-control" id="price" name="price">
+                    <c:if test='${error != null}'>
+                        <small class="text-danger">${error.get("price")}</small>
+                    </c:if>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" class="form-control" id="description" name="description">
+                    <c:if test='${error != null}'>
+                        <small class="text-danger">${error.get("description")}</small>
+                    </c:if>
                 </div>
                 <div class="form-group">
                     <label for="manufacturer">Manufacturer</label>
                     <input type="text" class="form-control" id="manufacturer" name="manufacturer">
+                    <c:if test='${error != null}'>
+                        <small class="text-danger">${error.get("manufacturer")}</small>
+                    </c:if>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6 mx-auto">

@@ -3,16 +3,13 @@ package repository.impl;
 import model.Product;
 import repository.IProductRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductRepositoryImpl implements IProductRepository {
     private static Map<Integer, Product> productMap;
 
     static {
-        productMap = new HashMap<>();
+        productMap = new TreeMap<>();
         productMap.put(1, new Product(1, "Omo", 8000.0, "2021", "Unilever"));
         productMap.put(2, new Product(2, "Clearmen", 50000.0, "Clear for men", "Clear"));
         productMap.put(3, new Product(3, "HP Envy", 22000000.0, "Envy 15", "HP"));

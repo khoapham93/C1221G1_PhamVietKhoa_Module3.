@@ -36,8 +36,7 @@
             <th scope="col">Price</th>
             <th scope="col">Description</th>
             <th scope="col">Manufacturer</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col" colspan="2">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +62,11 @@
                 <td>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
-                            onclick="deleteProduct(${product.getId()})">
+                            onclick="deleteProduct(
+                                <c:out value="\'${product.getId()}\'"/>,
+                                <c:out value="\'${product.getName()}\'"/>
+                                )"
+                    >
                         delete
                     </button>
                 </td>
@@ -83,28 +86,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Do you really want to delete this product?</p>
+                <p>Do you really want to delete product
+                    <span class="text-danger font-weight-bold" id="nameDelete"></span>
+                </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form method="post">
-                    <input type="hidden" name="action" value="delete">
-                    <input type="hidden" name="id" id="idDelete">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                <div class="mx-auto row">
+                    <form action="/products" method="post">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" id="idDelete">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 </body>
 </html>
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script>
-    function deleteProduct(id) {
+    function deleteProduct(id, name) {
         document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerText =" "+ name + "?";
     }
 </script>

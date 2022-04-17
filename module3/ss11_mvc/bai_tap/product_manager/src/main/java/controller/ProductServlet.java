@@ -36,8 +36,6 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 deleteProduct(request, response);
                 break;
-            case "view":
-                break;
             default:
                 goListProduct(request, response);
         }
@@ -63,6 +61,7 @@ public class ProductServlet extends HttpServlet {
                 goSearchProduct(request, response);
                 break;
             case "view":
+                goDetailProduct(request,response);
                 break;
             default:
                 goListProduct(request, response);
@@ -72,14 +71,14 @@ public class ProductServlet extends HttpServlet {
 
     private void goSearchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String keyWord = request.getParameter("searchKey").toLowerCase();
-        if ("".equals(keyWord)){
+        if ("".equals(keyWord)) {
             response.sendRedirect("/");
-        }else {
-            List<Product> products= iProductService.search(keyWord);
+        } else {
+            List<Product> products = iProductService.search(keyWord);
             request.setAttribute("products", products);
             request.getRequestDispatcher("/list.jsp").forward(request, response);
         }
-    
+
     }
 
     private void goEditProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,7 +86,6 @@ public class ProductServlet extends HttpServlet {
         Product product = iProductService.findByid(id);
         request.setAttribute("product", product);
         request.getRequestDispatcher("/edit.jsp").forward(request, response);
-
     }
 
     private void goListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -100,15 +98,28 @@ public class ProductServlet extends HttpServlet {
         request.getRequestDispatcher("/create.jsp").forward(request, response);
 
     }
-
+    private void goDetailProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        Product product = iProductService.findByid(id);
+        request.setAttribute("product", product);
+        request.getRequestDispatcher("/detail.jsp").forward(request, response);
+    }
     private void createProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
-        Double price = Double.valueOf(request.getParameter("price"));
+        Double price = null;
+        try {
+            price = Double.valueOf(request.getParameter("price"));
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         String description = request.getParameter("description");
         String manufacturer = request.getParameter("manufacturer");
         Integer id = (int) (Math.random() * 10000);
 
         Product product = new Product(id, name, price, description, manufacturer);
+
         Map<String, String> map = iProductService.save(product);
         if (map.isEmpty()) {
             request.setAttribute("message", "Product was create successfully!");
@@ -122,7 +133,14 @@ public class ProductServlet extends HttpServlet {
     private void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.valueOf(request.getParameter("id"));
         String name = request.getParameter("name");
-        Double price = Double.valueOf(request.getParameter("price"));
+
+        Double price = null;
+        try {
+            price = Double.valueOf(request.getParameter("price"));
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         String description = request.getParameter("description");
         String manufacturer = request.getParameter("manufacturer");
 
@@ -130,8 +148,7 @@ public class ProductServlet extends HttpServlet {
 
         Map<String, String> map = iProductService.save(product);
         if (map.isEmpty()) {
-            request.setAttribute("message", "Product was update successfully!");
-            request.getRequestDispatcher("edit.jsp").forward(request, response);
+            response.sendRedirect("/");
         } else {
             request.setAttribute("error", map);
             request.setAttribute("product", product);
@@ -144,4 +161,5 @@ public class ProductServlet extends HttpServlet {
         iProductService.remove(id);
         response.sendRedirect("/");
     }
+
 }

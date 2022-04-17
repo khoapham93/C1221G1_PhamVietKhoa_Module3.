@@ -14,39 +14,45 @@
             <form method="post">
                 <div class="form-group">
                     <label for="name">Product name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="${product.getName()}">
+                    <input type="text" class="form-control" id="name" name="name"
+                           value="${product.getName()}" >
                     <c:if test='${error != null}'>
-                        <p class="text-danger">${error.get("name")}</p>
+                        <small class="text-danger">${error.get("name")}</small>
                     </c:if>
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="number" class="form-control" id="price" name="price" value="${product.getPrice()}">
+                    <input type="number" class="form-control" id="price" name="price"
+                           value="${product.getPrice()}" >
+                    <c:if test='${error != null}'>
+                        <small class="text-danger">${error.get("price")}</small>
+                    </c:if>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description" value="${product.getDescription()}">
+                    <input type="text" class="form-control" id="description" name="description"
+                           value="${product.getDescription()}" >
+                    <c:if test='${error != null}'>
+                        <small class="text-danger">${error.get("description")}</small>
+                    </c:if>
                 </div>
                 <div class="form-group">
                     <label for="manufacturer">Manufacturer</label>
-                    <input type="text" class="form-control" id="manufacturer" name="manufacturer" value="${product.getManufacturer()}" >
+                    <input type="text" class="form-control" id="manufacturer" name="manufacturer"
+                           value="${product.getManufacturer()}" >
+                    <c:if test='${error != null}'>
+                        <small class="text-danger">${error.get("manufacturer")}</small>
+                    </c:if>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6 mx-auto">
-<%--                        <button type="submit" class="btn btn-secondary btn-block">Back to Home</button>--%>
+                        <%--                        <button type="submit" class="btn btn-secondary btn-block">Back to Home</button>--%>
                         <a class="btn btn-secondary btn-block" role="button" href="/">
                             Back to Home
                         </a>
                     </div>
                     <div class="col-sm-6 mx-auto">
                         <button type="submit" class="btn btn-primary btn-block">Update</button>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="mx-auto">
-                        <c:if test='${message != null}'>
-                            <span class="message text-success">${message}</span>
-                        </c:if>
                     </div>
                 </div>
             </form>
