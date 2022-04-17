@@ -21,7 +21,7 @@ public class BaseRepository {
     }
 
     public Connection getConnectionJavaToDB() {
-               try {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(jdbcUrl, username, password);
             return connection;
