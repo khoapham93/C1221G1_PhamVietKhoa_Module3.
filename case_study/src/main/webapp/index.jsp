@@ -9,45 +9,8 @@
     <link href="css/Styles.css">
 </head>
 <body>
-<header class=" px-3 navbar navbar-light bg-light ">
-    <a class="navbar-brand" href="#">
-        <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" height="65" width="50" alt="">
-    </a>
-    <div class="my-2 my-lg-0">
-        <p> Nguyen Van A</p>
-    </div>
-</header>
-
-<nav class=" px-5 navbar navbar-expand-lg navbar-dark bg-dark fs-5">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
-                <a class="nav-link active" href="#">Home</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">Employee</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">Customer</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">Service</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">Contract</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+<c:import url="/components/header.jsp" />
+<c:import url="/components/navbar.jsp" />
 <div class="row">
     <div class="col-sm-2 border-end bg-white" id="sidebar">
         <div class="list-group list-group-flush border">
@@ -72,12 +35,7 @@
         </p>
     </div>
 </div>
-<footer class="text-center text-lg-start bg-light text-muted">
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2022 Copyright:
-        <a class="text-reset fw-bold" href="#">Khoapham</a>
-    </div>
-</footer>
+<c:import url="/components/footer.jsp" />
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

@@ -16,7 +16,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> getList() {
-        return iUserRepository.getList();
+//        return iUserRepository.getList();
+        return iUserRepository.getListUsingSP();
     }
 
     private Map<String, String> validate(User user) {
@@ -55,7 +56,8 @@ public class UserServiceImpl implements IUserService {
 
         Map<String, String> map = validate(user);
         if (map.isEmpty()) {
-            boolean checkUpdate = iUserRepository.update(user);
+//            boolean checkUpdate = iUserRepository.update(user);
+            boolean checkUpdate = iUserRepository.updateUsingSP(user);
             if (!checkUpdate){
                 map.put("message","Something's wrong, can't update!");
             }
@@ -70,7 +72,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean remove(Integer id) {
-        return iUserRepository.remove(id);
+//        return iUserRepository.remove(id);
+        return iUserRepository.removeUingSP(id);
     }
 
     @Override

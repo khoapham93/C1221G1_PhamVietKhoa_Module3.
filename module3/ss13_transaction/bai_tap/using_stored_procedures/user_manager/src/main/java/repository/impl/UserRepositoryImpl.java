@@ -251,21 +251,21 @@ public class UserRepositoryImpl implements IUserRepository {
         boolean rowUpdated = false;
         String query = "{CALL update_user(?)}";
 
-        PreparedStatement preparedStatement = null;
+        CallableStatement callableStatement = null;
 
         try {
-            preparedStatement = this.baseRepository.getConnectionJavaToDB().prepareStatement(UPDATE_USERS_SQL);
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getCountry());
-            preparedStatement.setInt(4, user.getId());
-            rowUpdated = preparedStatement.executeUpdate() > 0;
+            callableStatement = this.baseRepository.getConnectionJavaToDB().prepareCall(query);
+            callableStatement.setString(1, user.getName());
+            callableStatement.setString(2, user.getEmail());
+            callableStatement.setString(3, user.getCountry());
+            callableStatement.setInt(4, user.getId());
+            rowUpdated = callableStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                assert preparedStatement != null;
-                preparedStatement.close();
+                assert callableStatement != null;
+                callableStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -275,6 +275,25 @@ public class UserRepositoryImpl implements IUserRepository {
 
     @Override
     public boolean removeUingSP(Integer id) {
-        return false;
+        boolean rowDeleted = false;
+
+        String query = "{CALL delete_user(?)}";
+        CallableStatement callableStatement = null;
+        try {
+            callableStatement = this.baseRepository.getConnectionJavaToDB().prepareCall(query);
+            callableStatement.setInt(1, id);
+            //callableStatement.executeUpdate();
+            rowDeleted = callableStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert callableStatement != null;
+                callableStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return rowDeleted;
     }
 }
