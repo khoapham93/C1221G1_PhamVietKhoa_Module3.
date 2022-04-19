@@ -19,7 +19,9 @@ public class ProductServiceImpl implements IProductService {
     }
 
     private Map<String, String> validate(Product product) {
+
         Map<String, String> messageMap = new HashMap<>();
+
         if ("".equals(product.getName())) {
             messageMap.put("name", "Name can't empty");
         } else if (!product.getName().matches(NAME_REGEX)) {
@@ -31,14 +33,13 @@ public class ProductServiceImpl implements IProductService {
         } else if (product.getPrice() < 0) {
             messageMap.put("price", "Price must be greater than 0");
         }
-
-
         return messageMap;
     }
 
     @Override
     public Map<String, String> save(Product product) {
         Map<String, String> map = validate(product);
+
         if (map.isEmpty()) {
             iProductRepository.save(product);
         }
@@ -47,6 +48,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Product findByid(Integer id) {
+
         return iProductRepository.findByid(id);
     }
 

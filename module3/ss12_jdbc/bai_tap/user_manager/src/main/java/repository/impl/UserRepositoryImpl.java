@@ -58,8 +58,8 @@ public class UserRepositoryImpl implements IUserRepository {
             try {
                 assert preparedStatement != null;
                 preparedStatement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
         }
         return users;
