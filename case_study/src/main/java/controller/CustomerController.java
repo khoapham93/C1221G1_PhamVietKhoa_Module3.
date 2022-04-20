@@ -1,8 +1,12 @@
 package controller;
 
 import dto.CustomerDTO;
+import models.Customer;
+import models.CustomerType;
 import service.ICustomerService;
+import service.ICustomerTypeService;
 import service.impl.CustomerServiceImpl;
+import service.impl.CustomerTypeServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "controller.CustomerController",urlPatterns = "/customers")
+@WebServlet(name = "controller.CustomerController", urlPatterns = "/customers")
 public class CustomerController extends HttpServlet {
     private ICustomerService iCustomerService = new CustomerServiceImpl();
+    private ICustomerTypeService iCustomerTypeService = new CustomerTypeServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -24,10 +31,21 @@ public class CustomerController extends HttpServlet {
         if (action == null) {
             action = "";
         }
+        switch (action) {
+            case "create":
+                createCustomer(request, response);
+                break;
+            case "edit":
+                editCustomer(request, response);
+                break;
+            case "delete":
+                deleteCustomer(request, response);
+            default:
+                goListCustomer(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -37,25 +55,250 @@ public class CustomerController extends HttpServlet {
         }
         switch (action) {
             case "create":
-//                goCreateUser(request, response);
+                goCreateCustomer(request, response);
                 break;
             case "edit":
-//                goEditUser(request, response);
+                goEditCustomer(request, response);
                 break;
             case "search":
-//                goSearchUser(request, response);
+                goSearchCustomer(request, response);
                 break;
             case "view":
-//                goDetailUser(request,response);
+               goDetailCustomer(request,response);
                 break;
             default:
-                goListUser(request, response);
+                goListCustomer(request, response);
         }
     }
 
-    private void goListUser(HttpServletRequest request, HttpServletResponse response) {
-        List<CustomerDTO> customerDTOList = iCustomerService.getList();
-        request.setAttribute("customerList",customerDTOList);
-        request.setAttribute("/customers/list.jsp",customerDTOList);
+    private void goDetailCustomer(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.setAttribute("urlPath", "customer");
+
+            request.getRequestDispatcher("/view/customers/detail.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void goListCustomer(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            List<CustomerDTO> customerDTOList = iCustomerService.getList();
+            request.setAttribute("urlPath", "customer");
+            request.setAttribute("customerList", customerDTOList);
+            request.getRequestDispatcher("/view/customers/list.jsp").forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void goCreateCustomer(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            //get list customer type
+            List<CustomerType> customerTypes = iCustomerTypeService.getList();
+            request.setAttribute("urlPath", "customer");
+            request.setAttribute("types", customerTypes);
+            request.getRequestDispatcher("/view/customers/create.jsp").forward(request, response);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void createCustomer(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        String customerCode = request.getParameter("customerCode");
+
+        LocalDate birthday = null;
+        try {
+            birthday = LocalDate.parse(request.getParameter("birthday"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String idCard = request.getParameter("idCard");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+
+        Integer customerType = null;
+        try {
+            customerType = Integer.valueOf(request.getParameter("type"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Integer gender = null;
+        try {
+            gender = Integer.valueOf(request.getParameter("gender"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Customer customer =
+                new Customer(
+                        name,
+                        birthday,
+                        idCard,
+                        phone,
+                        email,
+                        address,
+                        customerCode,
+                        customerType,
+                        gender);
+        Map<String, String> map = iCustomerService.save(customer);
+        if (map.isEmpty()) {
+            try {
+                request.setAttribute("message", "Customer was create successfully!");
+                request.setAttribute("urlPath", "customer");
+                request.getRequestDispatcher("/view/customers/create.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                request.setAttribute("error", map);
+                request.setAttribute("urlPath", "customer");
+                request.setAttribute("customer", customer);
+                request.getRequestDispatcher("/view/customers/create.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void goEditCustomer(HttpServletRequest request, HttpServletResponse response) {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        Customer customer = iCustomerService.findById(id);
+        List<CustomerType> customerTypes = iCustomerTypeService.getList();
+
+        if (customer != null) {
+            try {
+                request.setAttribute("types", customerTypes);
+                request.setAttribute("customer", customer);
+                request.setAttribute("urlPath", "customer");
+                request.getRequestDispatcher("/view/customers/edit.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                request.setAttribute("message", "can't not find customer");
+                request.getRequestDispatcher("/").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void editCustomer(HttpServletRequest request, HttpServletResponse response) {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String customerCode = request.getParameter("customerCode");
+
+        LocalDate birthday = null;
+        try {
+            birthday = LocalDate.parse(request.getParameter("birthday"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String idCard = request.getParameter("idCard");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+
+        Integer customerType = null;
+        try {
+            customerType = Integer.valueOf(request.getParameter("type"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Integer gender = null;
+        try {
+            gender = Integer.valueOf(request.getParameter("gender"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Customer customer =
+                new Customer(
+                        id,
+                        name,
+                        birthday,
+                        idCard,
+                        phone,
+                        email,
+                        address,
+                        customerCode,
+                        customerType,
+                        gender);
+        Map<String, String> map = iCustomerService.update(customer);
+        if (map.isEmpty()) {
+            try {
+                response.sendRedirect("/customers");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            try {
+                request.setAttribute("error", map);
+                request.setAttribute("urlPath", "customer");
+                request.setAttribute("customer", customer);
+                request.getRequestDispatcher("/view/customers/edit.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        boolean checkDelete = iCustomerService.remove(id);
+        if (!checkDelete) {
+            try {
+                request.setAttribute("message", "Something's wrong, can't delete!");
+                request.getRequestDispatcher("/customers").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void goSearchCustomer(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String fieldSearch = request.getParameter("fieldSearch");
+            String searchKey = request.getParameter("searchKey");
+            List<CustomerDTO> customerDTOList = iCustomerService.search(fieldSearch, searchKey);
+            request.setAttribute("customerList", customerDTOList);
+            request.setAttribute("urlPath", "customer");
+            request.getRequestDispatcher("/view/customers/list.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

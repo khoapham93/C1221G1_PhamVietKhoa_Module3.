@@ -4,10 +4,7 @@ import model.User;
 import repository.BaseRepository;
 import repository.IUserRepository;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 public class UserRepositoryImpl implements IUserRepository {
@@ -162,6 +159,7 @@ public class UserRepositoryImpl implements IUserRepository {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
 
         return rowDeleted;
@@ -249,17 +247,25 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public boolean updateUsingSP(User user) {
         boolean rowUpdated = false;
-        String query = "{CALL update_user(?)}";
+        String query = "{CALL update_user(?,?,?,?,?)}";
 
         CallableStatement callableStatement = null;
 
         try {
             callableStatement = this.baseRepository.getConnectionJavaToDB().prepareCall(query);
-            callableStatement.setString(1, user.getName());
-            callableStatement.setString(2, user.getEmail());
-            callableStatement.setString(3, user.getCountry());
-            callableStatement.setInt(4, user.getId());
-            rowUpdated = callableStatement.executeUpdate() > 0;
+
+            callableStatement.setInt(1, user.getId());
+            callableStatement.setString(2, user.getName());
+            callableStatement.setString(3, user.getEmail());
+            callableStatement.setString(4, user.getCountry());
+            callableStatement.registerOutParameter(5, Types.INTEGER);
+            callableStatement.executeUpdate();
+
+            int row = callableStatement.getInt(5);
+
+            rowUpdated = row > 0;
+
+//            rowUpdated = callableStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

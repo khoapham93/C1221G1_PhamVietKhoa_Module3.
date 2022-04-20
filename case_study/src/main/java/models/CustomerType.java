@@ -2,14 +2,14 @@ package models;
 
 public class CustomerType {
     private Integer id;
-    private String Type;
+    private String type;
 
     public CustomerType(Integer id, String type) {
         this.id = id;
-        Type = type;
+        this.type = type;
     }
     public CustomerType( String type) {
-        Type = type;
+        this.type = type;
     }
 
     public CustomerType(){
@@ -25,10 +25,10 @@ public class CustomerType {
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        this.type = type;
     }
 }

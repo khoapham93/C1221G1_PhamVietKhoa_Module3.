@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item h5">
-                <a class="nav-link ${urlPath eq 'home' or urlPath eq '' ? 'active' : ''}" href="/index.jsp">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link ${urlPath eq 'home' or empty urlPath  ? 'active' : ''}" href="/index.jsp">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item h5">
                 <a class="nav-link ${urlPath eq 'employee' ? 'active' : ''}" href="/employees">Employee</a>
