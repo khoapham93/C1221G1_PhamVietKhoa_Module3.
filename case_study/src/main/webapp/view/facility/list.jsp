@@ -14,7 +14,7 @@
 <div class="container-fluid mx-auto">
     <div class="row justify-content-between py-1">
         <div class="col-4">
-            <a class="btn btn-primary" href="/employees?action=create" role="button"> + Create new service</a>
+            <a class="btn btn-primary" href="/facility?action=create" role="button"> + Create new service</a>
         </div>
     </div>
     <table id="myTable2" class="table table-striped table-bordered" style="width: 100%">
@@ -34,24 +34,26 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="employee" items="${employeeList}" varStatus="index">
+        <c:forEach var="facility" items="${facilityList}" varStatus="index">
             <tr>
                 <td>${index.count}</td>
                 <td>
-                    <a href="/employees?action=view&id=${employee.id}">
-                            ${employee.name}
+                    <a href="/facility?action=view&id=${facility.id}">
+                            ${facility.name}
                     </a>
                 </td>
-                <td> ${employee.phone} </td>
-                <td> ${employee.email} </td>
+                <td> ${facility.facilityType} </td>
+                <td> ${facility.floorSquare} </td>
                 <td>
                     <fmt:setLocale value="vi_VN"/>
-                    <fmt:formatNumber value="${employee.getSalary()}" type="currency"/>
+                    <fmt:formatNumber value="${facility.rentalFee}" type="currency"/>
                 </td>
-                <td> ${employee.position} </td>
-                <td> ${employee.department} </td>
+                <td> ${facility.maximumPeople} </td>
+                <td> ${facility.rentType} </td>
+                <td> ${facility.roomStandard} </td>
+                <td> ${facility.description} </td>
                 <td>
-                    <a class="btn btn-warning" role="button" href="/employees?action=edit&id=${employee.id}">
+                    <a class="btn btn-warning" role="button" href="/facility?action=edit&id=${facility.id}">
                         edit
                     </a>
                 </td>
@@ -59,8 +61,8 @@
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
                             onclick="deleteProduct(
-                                <c:out value="${employee.id}"/>,
-                                <c:out value="\'${employee.name}\'"/>
+                                <c:out value="${facility.id}"/>,
+                                <c:out value="\'${facility.name}\'"/>
                                     )"
                     >
                         delete
@@ -81,19 +83,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete employee</h5>
+                <h5 class="modal-title">Delete facility</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Do you really want to delete employee
+                <p>Do you really want to delete facility
                     <span class="text-danger font-weight-bold" id="nameDelete"></span>
                 </p>
             </div>
             <div class="modal-footer">
                 <div class="mx-auto row">
-                    <form action="/employees" method="post">
+                    <form action="/facility" method="post">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" id="idDelete">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -109,7 +111,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Search Employee</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Search facility</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -17,7 +17,7 @@
                 <a class="nav-link ${urlPath eq 'customer' ? 'active' : ''}" href="/customers">Customer</a>
             </li>
             <li class="nav-item h5">
-                <a class="nav-link ${urlPath eq 'service' ? 'active' : ''}" href="/service">Service</a>
+                <a class="nav-link ${urlPath eq 'service' ? 'active' : ''}" href="/facility">Service</a>
             </li>
             <li class="nav-item h5">
                 <a class="nav-link ${urlPath eq 'contract' ? 'active' : ''}" href="/contract">Contract</a>

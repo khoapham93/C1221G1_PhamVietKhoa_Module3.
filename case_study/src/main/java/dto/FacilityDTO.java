@@ -14,7 +14,18 @@ public class FacilityDTO {
     private Double poolSquare;
     private Integer numberFloor;
 
-    public FacilityDTO(Integer id, String facilityType, String rentType, String code, String name, Double floorSquare, Double rentalFee, Integer maximumPeople, String roomStandard, String description, Double poolSquare, Integer numberFloor) {
+    public FacilityDTO(Integer id,
+                       String facilityType,
+                       String rentType,
+                       String code,
+                       String name,
+                       Double floorSquare,
+                       Double rentalFee,
+                       Integer maximumPeople,
+                       String roomStandard,
+                       String description,
+                       Double poolSquare,
+                       Integer numberFloor) {
         this.id = id;
         this.facilityType = facilityType;
         this.rentType = rentType;
