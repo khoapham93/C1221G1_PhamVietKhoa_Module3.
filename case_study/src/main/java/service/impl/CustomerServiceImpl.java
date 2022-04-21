@@ -30,8 +30,8 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public List<CustomerDTO> search(String fieldSearch, String searchKey) {
-        return iCustomerRopository.search(fieldSearch,searchKey);
+    public List<CustomerDTO> search(String fieldSearch1, String fieldSearch2, String fieldSearch3, String searchKey1, String searchKey2, String searchKey3) {
+        return iCustomerRopository.search(fieldSearch1,fieldSearch2,fieldSearch3, searchKey1,searchKey2,searchKey3);
     }
 
     @Override

@@ -11,5 +11,5 @@ public interface ICustomerRopository extends ICRUDRepository<Customer> {
 
     Customer findById(Integer id);
 
-    List<CustomerDTO> search(String fieldSearch, String searchKey);
+    List<CustomerDTO> search(String fieldSearch1, String fieldSearch2, String fieldSearch3, String searchKey1, String searchKey2, String searchKey3);
 }

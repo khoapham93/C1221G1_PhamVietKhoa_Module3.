@@ -63,19 +63,20 @@ public class CustomerRepositoryImpl implements ICustomerRopository {
                     "ON cu.customer_type_id = ct.customer_type_id;";
 
     private static String SELECT_CUSTOMER_DTO =
-                    "SELECT cu.customer_id,\n" +
-                            "       cu.name,\n" +
-                            "       cu.birthday,\n" +
-                            "       cu.gender,\n" +
-                            "       cu.id_card,\n" +
-                            "       cu.phone,\n" +
-                            "       cu.email,\n" +
-                            "       cu.address,\n" +
-                            "       ct.value,\n" +
-                            "       cu.customer_code\n" +
-                            "FROM customer AS cu\n" +
-                            "         LEFT JOIN customer_type AS ct\n" +
-                            "        ON cu.customer_type_id = ct.customer_type_id";
+            "SELECT cu.customer_id,\n" +
+                    "       cu.name,\n" +
+                    "       cu.birthday,\n" +
+                    "       cu.gender,\n" +
+                    "       cu.id_card,\n" +
+                    "       cu.phone,\n" +
+                    "       cu.email,\n" +
+                    "       cu.address,\n" +
+                    "       ct.value,\n" +
+                    "       cu.customer_code\n" +
+                    "FROM customer AS cu\n" +
+                    "         LEFT JOIN customer_type AS ct\n" +
+                    "        ON cu.customer_type_id = ct.customer_type_id";
+
     @Override
     public List<CustomerDTO> getList() {
         List<CustomerDTO> customerDTOList = new ArrayList<>();
@@ -180,14 +181,21 @@ public class CustomerRepositoryImpl implements ICustomerRopository {
     }
 
     @Override
-    public List<CustomerDTO> search(String fieldSearch, String searchKey) {
+    public List<CustomerDTO> search(String fieldSearch1, String fieldSearch2, String fieldSearch3, String searchKey1, String searchKey2, String searchKey3) {
         List<CustomerDTO> customerDTOList = new ArrayList<>();
-        SELECT_CUSTOMER_DTO+= " WHERE "+fieldSearch+" LIKE ?;";
+
+        String searchQuery = SELECT_CUSTOMER_DTO + " WHERE `" + fieldSearch1 + "` LIKE ? " +
+                "AND `" + fieldSearch2 + "` LIKE ? " +
+                "AND `" + fieldSearch3 + "` LIKE ? ;";
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = this.baseRepository.getConnection().prepareStatement(SELECT_CUSTOMER_DTO);
-            preparedStatement.setString(1,"%"+searchKey+"%");
+            preparedStatement = this.baseRepository.getConnection().prepareStatement(searchQuery);
+            preparedStatement.setString(1, "%" + searchKey1 + "%");
+            preparedStatement.setString(2, "%" + searchKey2 + "%");
+            preparedStatement.setString(3, "%" + searchKey3 + "%");
+            System.out.println();
             ResultSet resultSet = preparedStatement.executeQuery();
+
             Integer id;
             String customerCode;
             String name;
@@ -231,6 +239,7 @@ public class CustomerRepositoryImpl implements ICustomerRopository {
         }
         return customerDTOList;
     }
+
     @Override
     public void save(Customer customer) {
         PreparedStatement preparedStatement = null;
@@ -298,7 +307,7 @@ public class CustomerRepositoryImpl implements ICustomerRopository {
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
+        } finally {
             try {
                 preparedStatement.close();
             } catch (SQLException throwables) {

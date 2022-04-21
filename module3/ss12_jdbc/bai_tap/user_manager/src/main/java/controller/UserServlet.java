@@ -150,7 +150,12 @@ public class UserServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }else {
-            response.sendRedirect("/");
+            try {
+                request.setAttribute("message", "delete successfully!");
+                goListUser(request,response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
         }
     }
 

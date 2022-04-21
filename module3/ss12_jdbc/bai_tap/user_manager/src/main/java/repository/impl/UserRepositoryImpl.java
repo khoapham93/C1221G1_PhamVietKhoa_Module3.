@@ -56,7 +56,7 @@ public class UserRepositoryImpl implements IUserRepository {
             e.printStackTrace();
         } finally {
             try {
-                assert preparedStatement != null;
+
                 preparedStatement.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -79,7 +79,7 @@ public class UserRepositoryImpl implements IUserRepository {
             e.printStackTrace();
         } finally {
             try {
-                assert preparedStatement != null;
+
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -102,7 +102,7 @@ public class UserRepositoryImpl implements IUserRepository {
             e.printStackTrace();
         } finally {
             try {
-                assert preparedStatement != null;
+
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -133,7 +133,7 @@ public class UserRepositoryImpl implements IUserRepository {
             e.printStackTrace();
         } finally {
             try {
-                assert preparedStatement != null;
+
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -156,7 +156,7 @@ public class UserRepositoryImpl implements IUserRepository {
             e.printStackTrace();
         } finally {
             try {
-                assert preparedStatement != null;
+
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -195,7 +195,7 @@ public class UserRepositoryImpl implements IUserRepository {
             e.printStackTrace();
         } finally {
             try {
-                assert preparedStatement != null;
+
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();

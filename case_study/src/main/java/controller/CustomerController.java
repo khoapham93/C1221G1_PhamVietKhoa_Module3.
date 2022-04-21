@@ -64,7 +64,7 @@ public class CustomerController extends HttpServlet {
                 goSearchCustomer(request, response);
                 break;
             case "view":
-               goDetailCustomer(request,response);
+                goDetailCustomer(request, response);
                 break;
             default:
                 goListCustomer(request, response);
@@ -97,6 +97,11 @@ public class CustomerController extends HttpServlet {
 
     private void goCreateCustomer(HttpServletRequest request, HttpServletResponse response) {
         try {
+//            String value = null;
+//            double b = value == null || value.isEmpty() ? Double.NaN : Double.parseDouble(value);
+//            System.out.println(b);
+//            System.out.println(Double.isNaN(b));
+
             //get list customer type
             List<CustomerType> customerTypes = iCustomerTypeService.getList();
             request.setAttribute("urlPath", "customer");
@@ -187,7 +192,7 @@ public class CustomerController extends HttpServlet {
         } else {
             try {
                 request.setAttribute("message", "can't not find customer");
-                request.getRequestDispatcher("/").forward(request, response);
+                request.getRequestDispatcher("/customers").forward(request, response);
             } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
@@ -239,13 +244,9 @@ public class CustomerController extends HttpServlet {
                         gender);
         Map<String, String> map = iCustomerService.update(customer);
         if (map.isEmpty()) {
-            try {
-                response.sendRedirect("/customers");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            request.setAttribute("message", "Update successfully!");
+            goListCustomer(request, response);
         } else {
-
             try {
                 request.setAttribute("error", map);
                 request.setAttribute("urlPath", "customer");
@@ -267,14 +268,22 @@ public class CustomerController extends HttpServlet {
             } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            request.setAttribute("message", "delete successfully!");
+            goListCustomer(request, response);
+
         }
     }
 
     private void goSearchCustomer(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String fieldSearch = request.getParameter("fieldSearch");
-            String searchKey = request.getParameter("searchKey");
-            List<CustomerDTO> customerDTOList = iCustomerService.search(fieldSearch, searchKey);
+            String fieldSearch1 = request.getParameter("fieldSearch1");
+            String searchKey1 = request.getParameter("searchKey1");
+            String fieldSearch2 = request.getParameter("fieldSearch2");
+            String searchKey2 = request.getParameter("searchKey2");
+            String fieldSearch3 = request.getParameter("fieldSearch3");
+            String searchKey3 = request.getParameter("searchKey3");
+            List<CustomerDTO> customerDTOList = iCustomerService.search(fieldSearch1,fieldSearch2,fieldSearch3, searchKey1,searchKey2,searchKey3);
             request.setAttribute("customerList", customerDTOList);
             request.setAttribute("urlPath", "customer");
             request.getRequestDispatcher("/view/customers/list.jsp").forward(request, response);

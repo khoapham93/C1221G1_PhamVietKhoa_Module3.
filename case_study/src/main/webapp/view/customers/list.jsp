@@ -12,34 +12,14 @@
 <c:import url="/components/header.jsp"/>
 <c:import url="/components/navbar.jsp"/>
 <div class="container-fluid mx-auto">
-    <h3 class="text-center py-1"> Customer list</h3>
-    <div class="row justify-content-between">
+    <div class="row justify-content-between py-1">
         <div class="col-4">
             <a class="btn btn-primary" href="/customers?action=create" role="button"> + Create new customer</a>
         </div>
-        <div class="col-5">
-            <form method="get">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Searching" aria-label="search" name="searchKey">
-                    <input type="hidden" name="action" value="search">
-                    <div class="input-group-append">
-                        <select class="form-control" id="fieldSearch" name="fieldSearch">
-                            <option value="name">Name</option>
-                            <option value="gender">Gender</option>
-                            <option value="phone">Phone</option>
-                            <option value="email">Email</option>
-                            <option value="birthday">Birthday</option>
-                            <option value="customer_type">Customer type</option>
-                            <option value="customer_code">Customer code</option>
-                            <option value="address">Address</option>
-                            <option value="id_card">Id Card</option>
-                        </select>
-                    </div>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
-                    </div>
-                </div>
-            </form>
+        <div class="col-2">
+            <button type="button" class="btn btn-primary btn-block " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Search
+                Customer
+            </button>
         </div>
     </div>
     <table id="myTable2" class="table table-striped table-bordered" style="width: 100%">
@@ -130,6 +110,78 @@
         </div>
     </div>
 </div>
+
+<%--Search modal--%>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="get">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="input-group col-5">
+                            <select class="form-control" id="fieldSearch1" name="fieldSearch1">
+                                <option value="name">Name</option>
+                                <option value="gender">Gender</option>
+                                <option value="phone">Phone</option>
+                                <option value="email">Email</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="id_card">Id Card</option>
+                                <option value="address">Address</option>
+                                <option value="customer_code">Customer Code</option>
+                                <option value="value">Customer Type</option>
+                            </select>
+                        </div>
+                        <input type="text" class="form-control col-7" placeholder="Key word 1" aria-label="search" name="searchKey1">
+                    </div>
+                    <div class="form-group row">
+                        <div class="input-group col-5">
+                            <select class="form-control" id="fieldSearch2" name="fieldSearch2">
+                                <option value="name">Name</option>
+                                <option value="gender">Gender</option>
+                                <option value="phone">Phone</option>
+                                <option value="email">Email</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="id_card">Id Card</option>
+                                <option value="address">Address</option>
+                                <option value="customer_code">Customer Code</option>
+                                <option value="value">Customer Type</option>
+                            </select>
+                        </div>
+                        <input type="text" class="form-control col-7" placeholder="Key word 2" aria-label="search" name="searchKey2">
+                    </div>
+                    <div class="form-group row">
+                        <div class="input-group col-5">
+                            <select class="form-control" id="fieldSearch3" name="fieldSearch3">
+                                <option value="name">Name</option>
+                                <option value="gender">Gender</option>
+                                <option value="phone">Phone</option>
+                                <option value="email">Email</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="id_card">Id Card</option>
+                                <option value="address">Address</option>
+                                <option value="customer_code">Customer Code</option>
+                                <option value="value">Customer Type</option>
+                            </select>
+                        </div>
+                        <input type="text" class="form-control col-7" placeholder="Key word 3" aria-label="search" name="searchKey3">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" name="action" value="search">
+                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

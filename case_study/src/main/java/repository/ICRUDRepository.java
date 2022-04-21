@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ICRUDRepository<E> {
 
-    void save(Customer customer);
+    void save(E e);
 
-    boolean update(Customer customer);
+    boolean update(E e);
 
     boolean remove(Integer id);
 }
