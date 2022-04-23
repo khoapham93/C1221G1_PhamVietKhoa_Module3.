@@ -4,14 +4,24 @@ public class Account {
     private String username;
     private String password;
     private String name;
+    private String role;
 
-    public Account(String username, String password, String name) {
+    public Account(String username, String password, String name, String role) {
         this.username = username;
         this.password = password;
         this.name = name;
+        this.role = role;
     }
     public Account(){
 
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {

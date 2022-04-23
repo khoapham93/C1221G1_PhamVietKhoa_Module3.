@@ -27,7 +27,7 @@
                 <div class="form-group row">
                     <label for="password" class="col-sm-3 col-form-label">Password</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" value="${password}">
                     </div>
                 </div>
                 <div class="form-group row">

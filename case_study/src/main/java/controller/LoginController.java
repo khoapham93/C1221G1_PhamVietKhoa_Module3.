@@ -28,13 +28,11 @@ public class LoginController extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "login":
-                goLogin(request, response);
-                break;
             case "logout":
                 request.getSession().removeAttribute("usernameSession");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
                 break;
+            case "login":
             default:
                 goLogin(request, response);
         }
@@ -58,6 +56,7 @@ public class LoginController extends HttpServlet {
                     }
                 }
                 request.getSession().setAttribute("usernameSession", account.getName());
+                request.getSession().setAttribute("roleSession", account.getRole());
                 response.sendRedirect("/");
             } catch (IOException e) {
                 e.printStackTrace();

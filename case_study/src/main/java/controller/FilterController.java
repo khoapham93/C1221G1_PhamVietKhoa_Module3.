@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "FilterController",value = "/*")
+@WebFilter(filterName = "FilterController", value = "/*")
 public class FilterController implements Filter {
 
     public void destroy() {
@@ -21,12 +21,26 @@ public class FilterController implements Filter {
         HttpSession session = request.getSession(false);
 
         String loginURI = request.getContextPath() + "/login"; // http://localhost:8080/login
+        String employeeURI = request.getContextPath() + "/employees";
 
         boolean loggedIn = session != null && session.getAttribute("usernameSession") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
 
+        boolean employeeRequest = request.getRequestURI().equals(employeeURI);
+        boolean havePermission = session != null &&
+                ("admin".equals(session.getAttribute("roleSession"))
+                        || "manager".equals(session.getAttribute("roleSession")));
+
         if (loggedIn || loginRequest) {
-            chain.doFilter(request, response);
+            if (employeeRequest) {
+                if (havePermission) {
+                    chain.doFilter(request, response);
+                } else {
+                    response.sendRedirect("access_denied.jsp");
+                }
+            } else {
+                chain.doFilter(request, response);
+            }
         } else {
             response.sendRedirect(loginURI);
 

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class LoginRepositoryImpl implements ILoginRepository {
     private BaseRepository baseRepository = new BaseRepository();
-    private static final String SELECT_ACCOUNT = "SELECT username, password, `name` from account where username = ? and password =?;";
+    private static final String SELECT_ACCOUNT = "SELECT username, password, `name`,`role` from account where username = ? and password =?;";
     @Override
     public Account chekLogin(String username, String password) {
         Account account = null;
@@ -24,12 +24,14 @@ public class LoginRepositoryImpl implements ILoginRepository {
             String usernameData;
             String passwordData;
             String nameData;
+            String role;
             while (resultSet.next()){
                 usernameData = resultSet.getString("username");
                 passwordData = resultSet.getString("password");
                 nameData = resultSet.getString("name");
+                role = resultSet.getString("role");
 
-                account = new Account(usernameData,passwordData,nameData);
+                account = new Account(usernameData,passwordData,nameData,role);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
