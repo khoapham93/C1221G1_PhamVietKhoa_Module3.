@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-sm-10">
                         <c:if test='${error != null}'>
-                            <small class="text-danger">${error.get("rentTypeId")}</small>
+                            <small class="text-danger">${error.get("facilityType")}</small>
                         </c:if>
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                     </div>
                 </div>
 
-                <%-- House--%>
+                <%-- ROOM--%>
                 <%--                <div class="form-group row">--%>
                 <%--                    <label for="phone" class="col-sm-4 col-form-label">Phone</label>--%>
                 <%--                    <div class="col-sm-8">--%>
@@ -198,18 +198,53 @@
 <c:import url="/components/footer.jsp"/>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
 <script>
+
 function showFacilityType(selectObject) {
     let selected = selectObject.value;
     if (selected ==3){
         document.getElementById("villaAndHouseOnly").hidden = true;
         document.getElementById("villaOnly").hidden = true;
+        $('#villaAndHouseOnly').find("input").each(function () {
+            $(this).val('');
+        });
+        $('#villaOnly').find("input").each(function () {
+            $(this).val('');
+        });
     }else if(selected ==2){
         document.getElementById("villaAndHouseOnly").hidden = false;
         document.getElementById("villaOnly").hidden = true;
+        $('#villaOnly').find("input").each(function () {
+            $(this).val('');
+        });
     }else {
         document.getElementById("villaAndHouseOnly").hidden = false;
         document.getElementById("villaOnly").hidden = false;
     }
 }
+$(function() {
+    let selected =document.getElementById("facilityTypeId").value;
+    if (selected ==3){
+        document.getElementById("villaAndHouseOnly").hidden = true;
+        document.getElementById("villaOnly").hidden = true;
+        $('#villaAndHouseOnly').find("input").each(function () {
+            $(this).val('');
+        });
+        $('#villaOnly').find("input").each(function () {
+            $(this).val('');
+        });
+    }else if(selected ==2){
+        document.getElementById("villaAndHouseOnly").hidden = false;
+        document.getElementById("villaOnly").hidden = true;
+        $('#villaOnly').find("input").each(function () {
+            $(this).val('');
+        });
+    }else {
+        document.getElementById("villaAndHouseOnly").hidden = false;
+        document.getElementById("villaOnly").hidden = false;
+    }
+});
 </script>

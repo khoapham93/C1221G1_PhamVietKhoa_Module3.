@@ -9,9 +9,9 @@
     <link href="css/Styles.css">
 </head>
 <body>
-<c:import url="/components/header.jsp" />
-<c:import url="/components/navbar.jsp" />
-<div class="row">
+<c:import url="/components/header.jsp"/>
+<c:import url="/components/navbar.jsp"/>
+<div class="container-fluid row">
     <div class="col-sm-2 border-end bg-white" id="sidebar">
         <div class="list-group list-group-flush border">
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
@@ -23,9 +23,11 @@
         </div>
     </div>
     <div class="col-sm-10 px-3">
-        <h1 class="mt-4">Simple Sidebar</h1>
-        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on
-            larger screens. When toggled using the button below, the menu will change.</p>
+        <h1 class="mt-4">THIS WORLD CLASS RESORT, FURAMA DANANG, REPUTABLE FOR BEING A CULINARY RESORT IN VIETNAM</h1>
+        <p>Overlooking the long stretch of wide white sand on Danang Beach, Furama Resort Danang is a gateway to three World Heritage Sites of Hoi An
+            (20 minutes), My Son (90 minutes) and Hue (2 hours). The 198 rooms and suites plus 70 two to four bedroom pool villas feature tasteful
+            décor, designed with traditional Vietnamese style and a touch of French colonial architecture and guarantee the Vietnam’s the most
+            prestigious resort -counting royalty, presidents, movie stars and international business leaders among its celebrity guests.</p>
         <p>
             Make sure to keep all page content within the
             <code>#page-content-wrapper</code>
@@ -35,7 +37,7 @@
         </p>
     </div>
 </div>
-<c:import url="/components/footer.jsp" />
+<c:import url="/components/footer.jsp"/>
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

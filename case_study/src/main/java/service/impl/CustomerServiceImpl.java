@@ -13,9 +13,43 @@ import java.util.Map;
 public class CustomerServiceImpl implements ICustomerService {
     private ICustomerRopository iCustomerRopository = new CustomerRepositoryImpl();
 
+    private static final String NAME_REGEX = "^\\p{L}+[0-9]*( (\\p{L}|[0-9])+)*$";
+    private static final String CUSTOMER_CODE_REGEX = "^KH-\\d{4}$";
+    private static final String PHONE_REGEX = "^(090|091|\\(84\\)90|\\(84\\)91)\\d{7}$";
+    private static final String IDCARD_REGEX = "^d{9}|d{12}$";
+    private static final String EMAIL_REGEX = "^\\w+([\\.-]?\\w+)*@[a-z]+\\.(\\w+)(\\.\\w{2,3})?";
+
     private Map<String, String> validate(Customer customer) {
+
         Map<String, String> map = new HashMap<>();
-        //validate
+
+        if (customer.getName() == null) {
+            map.put("name", "Name can't empty");
+        } else if (!customer.getName().matches(NAME_REGEX)) {
+            map.put("name", "Name is invalid!");
+        }
+
+        if(customer.getCustomerCode() == null){
+            map.put("customerCode","Customer code can't null!");
+        }else if (!customer.getCustomerCode().matches(CUSTOMER_CODE_REGEX)){
+            map.put("customerCode","Customer code format KH-XXXX!");
+        }
+        if (!customer.getPhone().matches(PHONE_REGEX)){
+            map.put("phone","Phone is begin with 090 or 091 or (84)...");
+        }
+        if (!customer.getIdCard().matches(IDCARD_REGEX)){
+            map.put("idCard","Id card include 9 or 12 numbers");
+        }
+        if (!customer.getEmail().matches(EMAIL_REGEX)){
+            map.put("email","Email invalid");
+        }
+        if (customer.getBirthday() == null){
+            map.put("birthday","Birthday invalid");
+        }
+        if (customer.getCustomerType() == null){
+            map.put("customerType","Customer type invalid");
+        }
+
         return map;
     }
 
@@ -48,7 +82,6 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Map<String, String> update(Customer customer) {
         Map<String, String> map = validate(customer);
-
         if (map.isEmpty()) {
             boolean checkUpdate = iCustomerRopository.update(customer);
             if (!checkUpdate) {

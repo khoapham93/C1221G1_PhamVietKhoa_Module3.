@@ -44,12 +44,11 @@ public class FacilityController extends HttpServlet {
                 break;
             case "delete":
 //                deleteCustomer(request, response);
+                break;
             default:
                 goListFacility(request, response);
         }
     }
-
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -104,6 +103,7 @@ public class FacilityController extends HttpServlet {
             e.printStackTrace();
         }
     }
+
     private void createFacility(HttpServletRequest request, HttpServletResponse response) {
 
         Integer facilityTypeId = null;
@@ -184,14 +184,9 @@ public class FacilityController extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
-            try {
-                request.setAttribute("error", map);
-                request.setAttribute("facility", facility);
-                request.setAttribute("urlPath", "service");
-                request.getRequestDispatcher("/view/facility/create.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
+            request.setAttribute("error", map);
+            request.setAttribute("facility", facility);
+            goCreateFacility(request, response);
         }
     }
 }

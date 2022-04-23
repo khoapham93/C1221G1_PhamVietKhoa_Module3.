@@ -40,6 +40,7 @@ public class CustomerController extends HttpServlet {
                 break;
             case "delete":
                 deleteCustomer(request, response);
+                break;
             default:
                 goListCustomer(request, response);
         }
@@ -164,14 +165,12 @@ public class CustomerController extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
-            try {
-                request.setAttribute("error", map);
-                request.setAttribute("urlPath", "customer");
-                request.setAttribute("customer", customer);
-                request.getRequestDispatcher("/view/customers/create.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
+
+            request.setAttribute("error", map);
+            request.setAttribute("customer", customer);
+
+            goCreateCustomer(request, response);
+
         }
     }
 
@@ -247,14 +246,8 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("message", "Update successfully!");
             goListCustomer(request, response);
         } else {
-            try {
-                request.setAttribute("error", map);
-                request.setAttribute("urlPath", "customer");
-                request.setAttribute("customer", customer);
-                request.getRequestDispatcher("/view/customers/edit.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
+            request.setAttribute("error", map);
+            goEditCustomer(request, response);
         }
     }
 
@@ -283,7 +276,7 @@ public class CustomerController extends HttpServlet {
             String searchKey2 = request.getParameter("searchKey2");
             String fieldSearch3 = request.getParameter("fieldSearch3");
             String searchKey3 = request.getParameter("searchKey3");
-            List<CustomerDTO> customerDTOList = iCustomerService.search(fieldSearch1,fieldSearch2,fieldSearch3, searchKey1,searchKey2,searchKey3);
+            List<CustomerDTO> customerDTOList = iCustomerService.search(fieldSearch1, fieldSearch2, fieldSearch3, searchKey1, searchKey2, searchKey3);
             request.setAttribute("customerList", customerDTOList);
             request.setAttribute("urlPath", "customer");
             request.getRequestDispatcher("/view/customers/list.jsp").forward(request, response);

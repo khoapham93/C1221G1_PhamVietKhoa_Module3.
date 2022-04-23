@@ -42,11 +42,11 @@ public class EmployeeController extends HttpServlet {
                 break;
             case "delete":
                 deleteEmployee(request, response);
+                break;
             default:
                 goListEmployee(request, response);
         }
     }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -82,7 +82,7 @@ public class EmployeeController extends HttpServlet {
             String searchKey2 = request.getParameter("searchKey2");
             String fieldSearch3 = request.getParameter("fieldSearch3");
             String searchKey3 = request.getParameter("searchKey3");
-            List<EmployeeDTO> employeeDTOList = iEmployeeService.search(fieldSearch1,fieldSearch2,fieldSearch3, searchKey1,searchKey2,searchKey3);
+            List<EmployeeDTO> employeeDTOList = iEmployeeService.search(fieldSearch1, fieldSearch2, fieldSearch3, searchKey1, searchKey2, searchKey3);
             request.setAttribute("urlPath", "employee");
             request.setAttribute("employeeList", employeeDTOList);
             request.getRequestDispatcher("/view/employees/list.jsp").forward(request, response);
@@ -100,7 +100,7 @@ public class EmployeeController extends HttpServlet {
         List<AcademicLevel> academicLevels = iAcademicLevelService.getList();
         List<Position> positions = iPositionService.getList();
         List<Department> departments = iDepartmentService.getList();
-        if (employee!=null){
+        if (employee != null) {
             try {
                 request.setAttribute("employee", employee);
                 request.setAttribute("urlPath", "employee");
@@ -113,7 +113,7 @@ public class EmployeeController extends HttpServlet {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             try {
                 request.setAttribute("message", "can't not find Employee");
                 request.getRequestDispatcher("/employees").forward(request, response);
@@ -169,29 +169,29 @@ public class EmployeeController extends HttpServlet {
         Double salary = null;
         try {
             salary = Double.valueOf(request.getParameter("salary"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Integer positionId= null;
+        Integer positionId = null;
         try {
             positionId = Integer.valueOf(request.getParameter("position"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Integer academicId= null;
+        Integer academicId = null;
         try {
             academicId = Integer.valueOf(request.getParameter("academicLevel"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Integer departmentId= null;
+        Integer departmentId = null;
         try {
             departmentId = Integer.valueOf(request.getParameter("department"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Employee employee = new Employee(name, birthday, idCard, phone, email, address,salary,positionId,academicId,departmentId);
+        Employee employee = new Employee(name, birthday, idCard, phone, email, address, salary, positionId, academicId, departmentId);
 
         Map<String, String> map = iEmployeeService.save(employee);
 
@@ -204,14 +204,10 @@ public class EmployeeController extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
-            try {
-                request.setAttribute("error", map);
-                request.setAttribute("urlPath", "employee");
-                request.setAttribute("employee", employee);
-                request.getRequestDispatcher("/view/employees/create.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
+            request.setAttribute("error", map);
+            request.setAttribute("employee", employee);
+            goCreateEmployee(request, response);
+
         }
     }
 
@@ -231,29 +227,29 @@ public class EmployeeController extends HttpServlet {
         Double salary = null;
         try {
             salary = Double.valueOf(request.getParameter("salary"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Integer positionId= null;
+        Integer positionId = null;
         try {
             positionId = Integer.valueOf(request.getParameter("position"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Integer academicId= null;
+        Integer academicId = null;
         try {
             academicId = Integer.valueOf(request.getParameter("academicLevel"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Integer departmentId= null;
+        Integer departmentId = null;
         try {
             departmentId = Integer.valueOf(request.getParameter("department"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Employee employee = new Employee(id,name, birthday, idCard, phone, email, address,salary,positionId,academicId,departmentId);
+        Employee employee = new Employee(id, name, birthday, idCard, phone, email, address, salary, positionId, academicId, departmentId);
 
         Map<String, String> map = iEmployeeService.update(employee);
 
@@ -261,19 +257,10 @@ public class EmployeeController extends HttpServlet {
             request.setAttribute("message", "Update successfully!");
             goListEmployee(request, response);
         } else {
-            try {
-                request.setAttribute("error", map);
-                request.setAttribute("employee", employee);
-                request.setAttribute("urlPath", "employee");
-//                request.setAttribute("academicLevels", academicLevels);
-//                request.setAttribute("positions", positions);
-//                request.setAttribute("departments", departments);
-                request.getRequestDispatcher("/view/employees/edit.jsp").forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            request.setAttribute("error", map);
+            goEditEmployee(request, response);
+
         }
     }
 
