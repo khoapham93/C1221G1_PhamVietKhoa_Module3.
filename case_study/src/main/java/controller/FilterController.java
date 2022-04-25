@@ -36,14 +36,13 @@ public class FilterController implements Filter {
                 if (havePermission) {
                     chain.doFilter(request, response);
                 } else {
-                    response.sendRedirect("access_denied.jsp");
+                    response.sendRedirect("/common/access_denied.jsp");
                 }
             } else {
                 chain.doFilter(request, response);
             }
         } else {
             response.sendRedirect(loginURI);
-
         }
     }
 

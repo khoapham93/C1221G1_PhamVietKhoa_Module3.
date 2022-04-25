@@ -51,7 +51,7 @@ public class FacilityServiceImpl implements IFacilityService {
             map.put("rentalFee", "Rental Fee must be positive");
         }
         if (facility.getMaximumPeople() == null) {
-            map.put("maximumPeople", "People Can't null");
+            map.put("maximumPeople", "People must be a Integer");
         } else if (facility.getMaximumPeople() < 0) {
             map.put("maximumPeople", "People must be positive");
         }
@@ -61,7 +61,7 @@ public class FacilityServiceImpl implements IFacilityService {
 
         if (facility.getFacilityTypeId()<3){
             if (facility.getNumberFloor() == null) {
-                map.put("numberFloor", "Number Floor must be a number");
+                map.put("numberFloor", "Number Floor must be a Integer");
             } else if (facility.getNumberFloor() < 0) {
                 map.put("numberFloor", "Number Floor must be positive");
             }

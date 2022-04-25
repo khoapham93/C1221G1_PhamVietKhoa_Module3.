@@ -257,27 +257,37 @@ public class EmployeeController extends HttpServlet {
             request.setAttribute("message", "Update successfully!");
             goListEmployee(request, response);
         } else {
-
             request.setAttribute("error", map);
             goEditEmployee(request, response);
-
         }
     }
 
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) {
-        Integer id = Integer.valueOf(request.getParameter("id"));
-        boolean checkDelete = iEmployeeService.remove(id);
-        if (!checkDelete) {
-            try {
-                request.setAttribute("message", "Something's wrong, can't delete!");
-                request.getRequestDispatcher("/customers").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
+        Integer id = null;
+        try {
+            id = Integer.valueOf(request.getParameter("id"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (id != null) {
+            Employee employee = iEmployeeService.findById(id);
+            if (employee != null) {
+                boolean checkDelete = iEmployeeService.remove(id);
+                if (!checkDelete) {
+                    request.setAttribute("message", "Something's wrong, can't delete!");
+                    goListEmployee(request, response);
+                } else {
+                    request.setAttribute("message", "delete successfully!");
+                    goListEmployee(request, response);
+                }
+            }
+            else {
+                goListEmployee(request, response);
             }
         } else {
-            request.setAttribute("message", "delete successfully!");
+            request.setAttribute("message", "Something's wrong, can't delete!");
             goListEmployee(request, response);
-
         }
 
     }

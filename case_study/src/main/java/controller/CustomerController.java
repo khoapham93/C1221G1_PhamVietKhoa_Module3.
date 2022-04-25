@@ -252,19 +252,15 @@ public class CustomerController extends HttpServlet {
     }
 
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
+
         Integer id = Integer.valueOf(request.getParameter("id"));
         boolean checkDelete = iCustomerService.remove(id);
         if (!checkDelete) {
-            try {
-                request.setAttribute("message", "Something's wrong, can't delete!");
-                request.getRequestDispatcher("/customers").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
+            request.setAttribute("message", "Something's wrong, can't delete!");
+            goListCustomer(request, response);
         } else {
             request.setAttribute("message", "delete successfully!");
             goListCustomer(request, response);
-
         }
     }
 

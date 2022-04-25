@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet {
         switch (action) {
             case "logout":
                 request.getSession().removeAttribute("usernameSession");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
                 break;
             case "login":
             default:
@@ -57,7 +57,7 @@ public class LoginController extends HttpServlet {
                 }
                 request.getSession().setAttribute("usernameSession", account.getName());
                 request.getSession().setAttribute("roleSession", account.getRole());
-                response.sendRedirect("/");
+                response.sendRedirect("/common");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -65,7 +65,7 @@ public class LoginController extends HttpServlet {
             try {
                 request.setAttribute("message", "username or password wrong, try again");
                 request.setAttribute("username", username);
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -87,7 +87,7 @@ public class LoginController extends HttpServlet {
                     }
                 }
             }
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements ICustomerService {
     private static final String NAME_REGEX = "^\\p{L}+[0-9]*( (\\p{L}|[0-9])+)*$";
     private static final String CUSTOMER_CODE_REGEX = "^KH-\\d{4}$";
     private static final String PHONE_REGEX = "^(090|091|\\(84\\)90|\\(84\\)91)\\d{7}$";
-    private static final String IDCARD_REGEX = "^d{9}|d{12}$";
+    private static final String IDCARD_REGEX = "^(\\d{9}|\\d{12})$";
     private static final String EMAIL_REGEX = "^\\w+([\\.-]?\\w+)*@[a-z]+\\.(\\w+)(\\.\\w{2,3})?";
 
     private Map<String, String> validate(Customer customer) {

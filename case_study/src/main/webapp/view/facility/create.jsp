@@ -56,7 +56,7 @@
                 <div class="form-group row">
                     <label for="floorSquare" class="col-sm-4 col-form-label">Floor square</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="floorSquare" name="floorSquare"
+                        <input type="number" step="any" class="form-control" id="floorSquare" name="floorSquare"
                                value="${facility.floorSquare}">
                     </div>
                     <div class="col-sm-10">
@@ -68,7 +68,7 @@
                 <div class="form-group row">
                     <label for="rentalFee" class="col-sm-4 col-form-label">Rental cost</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="rentalFee" name="rentalFee"
+                        <input type="number" step="any" class="form-control" id="rentalFee" name="rentalFee"
                                value="${facility.rentalFee}">
                     </div>
                     <div class="col-sm-10">
@@ -80,7 +80,7 @@
                 <div class="form-group row">
                     <label for="maximumPeople" class="col-sm-4 col-form-label">Maximum people</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="maximumPeople" name="maximumPeople"
+                        <input type="number" step="any" class="form-control" id="maximumPeople" name="maximumPeople"
                                value="${facility.maximumPeople}">
                     </div>
                     <div class="col-sm-10">
@@ -135,7 +135,7 @@
                     <div class="form-group row">
                         <label for="numberFloor" class="col-sm-4 col-form-label">Number of floor</label>
                         <div class="col-sm-8">
-                            <input type="number" class="form-control" id="numberFloor" name="numberFloor"
+                            <input type="number" step="any" class="form-control" id="numberFloor" name="numberFloor"
                                    value="${facility.numberFloor}">
                         </div>
                         <div class="col-sm-10">
@@ -149,7 +149,7 @@
                 <div class="form-group row" id="villaOnly">
                     <label for="poolSquare" class="col-sm-4 col-form-label">Pool square</label>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" id="poolSquare" name="poolSquare"
+                        <input type="number" step="any" class="form-control" id="poolSquare" name="poolSquare"
                                value="${facility.poolSquare}">
                     </div>
                     <div class="col-sm-10">
@@ -158,20 +158,6 @@
                         </c:if>
                     </div>
                 </div>
-
-                <%-- ROOM--%>
-                <%--                <div class="form-group row">--%>
-                <%--                    <label for="phone" class="col-sm-4 col-form-label">Phone</label>--%>
-                <%--                    <div class="col-sm-8">--%>
-                <%--                        <input type="number" class="form-control" id="phone" name="phone"--%>
-                <%--                               value="${facility.phone}">--%>
-                <%--                    </div>--%>
-                <%--                    <div class="col-sm-10">--%>
-                <%--                        <c:if test='${error != null}'>--%>
-                <%--                            <small class="text-danger">${error.get("phone")}</small>--%>
-                <%--                        </c:if>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
 
                 <div class="form-group row">
                     <div class="col-sm-6 mx-auto">
