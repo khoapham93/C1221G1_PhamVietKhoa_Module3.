@@ -271,23 +271,24 @@ public class EmployeeController extends HttpServlet {
         }
 
         if (id != null) {
-            Employee employee = iEmployeeService.findById(id);
-            if (employee != null) {
-                boolean checkDelete = iEmployeeService.remove(id);
-                if (!checkDelete) {
-                    request.setAttribute("message", "Something's wrong, can't delete!");
-                    goListEmployee(request, response);
-                } else {
-                    request.setAttribute("message", "delete successfully!");
-                    goListEmployee(request, response);
+            boolean checkDelete = iEmployeeService.remove(id);
+            if (!checkDelete) {
+                try {
+                    response.sendRedirect("/employees");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }
-            else {
+            } else {
+                request.setAttribute("message", "delete successfully!");
                 goListEmployee(request, response);
             }
         } else {
-            request.setAttribute("message", "Something's wrong, can't delete!");
-            goListEmployee(request, response);
+            try {
+                response.sendRedirect("/employees");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
     }
